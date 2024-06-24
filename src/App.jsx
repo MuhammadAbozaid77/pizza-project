@@ -1,5 +1,8 @@
 //
 export default function App() {
-  const xx = "Hello";
-  return <div>{xx}</div>;
+  return (
+    <>
+      <div>yyyy</div>
+    </>
+  );
 }

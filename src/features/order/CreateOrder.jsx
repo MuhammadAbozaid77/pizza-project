@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form } from "react-router-dom";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -29,8 +30,22 @@ const fakeCart = [
     totalPrice: 15,
   },
 ];
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
 
-function CreateOrder() {
+  console.log(data);
+
+  const order = {
+    ...data,
+    cart: JSON.parse(data.cart),
+    priority: data.priority === "on",
+  };
+  console.log(order);
+
+  return null;
+}
+export default function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
@@ -38,7 +53,8 @@ function CreateOrder() {
     <div>
       <h2>Ready to order? Let's go!</h2>
 
-      <form>
+      {/* <Form method="POST" action="/order/new"> */}
+      <Form method="POST" action="/order/new">
         <div>
           <label>First Name</label>
           <input type="text" name="customer" required />
@@ -70,11 +86,10 @@ function CreateOrder() {
         </div>
 
         <div>
+          <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <button>Order now</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
-
-export default CreateOrder;

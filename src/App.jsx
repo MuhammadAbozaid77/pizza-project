@@ -3,7 +3,9 @@ import Home from "./features/home/Home";
 import Menu, { loader as menuLoader } from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
 import Order, { loader as orderLoader } from "./features/order/Order";
-import CreateOrder from "./features/order/CreateOrder";
+import CreateOrder, {
+  action as createOrderAction,
+} from "./features/order/CreateOrder";
 import AppLayout from "./Routers/AppLayout";
 import PageNotFound from "./components/ui/PageNotFound";
 
@@ -30,6 +32,7 @@ export default function App() {
         {
           path: "/order/new",
           element: <CreateOrder />,
+          action: createOrderAction,
         },
         {
           path: "/order/:orderId",
